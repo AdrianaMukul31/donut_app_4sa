@@ -63,11 +63,23 @@ class DonutTile extends StatelessWidget {
                         fontSize: 18,
                         color:donutColor[800],)),
                         Text(donutStore, style: TextStyle(fontSize: 18),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              children: [
+                                              Icon(Icons.favorite_border, ),
+                                              Icon(Icons.add)
+                                            ],),
                         )
+
                     ],
-                    )
+                    
+                    ),
                   //Icons
                   
+    
                   
         ),
       );
