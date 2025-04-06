@@ -1,21 +1,22 @@
 import 'package:flutter/material.dart';
 
-class DonutTile extends StatelessWidget {
-  final String donutFlavor;
-  final String donutPrice;
-  final String donutStore;
-  final dynamic donutColor;
+class SmoothieTile extends StatelessWidget {
+  final String smoothieFlavor;
+  final String smoothiePrice;
+  final String smoothieStore;
+  // Dinámico porque será de tipo color
+  final dynamic smoothieColor;
   final String imageName;
-  final VoidCallback onAdd; // Función para agregar al carrito
+  final VoidCallback onAdd; // Función de callback para agregar al carrito
 
-  const DonutTile({
+  const SmoothieTile({
     super.key,
-    required this.donutFlavor,
-    required this.donutPrice,
-    required this.donutStore,
-    required this.donutColor,
+    required this.smoothieFlavor,
+    required this.smoothiePrice,
+    required this.smoothieStore,
+    required this.smoothieColor,
     required this.imageName,
-    required this.onAdd, // Se pasa la función onAdd
+    required this.onAdd, // Asegúrate de pasar esta función al crear el widget
   });
 
   @override
@@ -24,7 +25,7 @@ class DonutTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
-          color: donutColor[50],
+          color: smoothieColor[50],
           borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
@@ -34,7 +35,7 @@ class DonutTile extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: donutColor[100],
+                    color: smoothieColor[100],
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
@@ -42,33 +43,33 @@ class DonutTile extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                   child: Text(
-                    '\$$donutPrice',
+                    '\$$smoothiePrice',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: donutColor[800],
+                      color: smoothieColor[800],
                     ),
                   ),
                 ),
               ],
             ),
-            // Imagen del donut
+            // Imagen del smoothie
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               child: Image.asset(imageName),
             ),
-            // Nombre del donut
+            // Nombre del smoothie
             Text(
-              donutFlavor,
+              smoothieFlavor,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: donutColor[800],
+                color: smoothieColor[800],
               ),
             ),
-            // Tienda del donut
+            // Tienda de smoothies
             Text(
-              donutStore,
+              smoothieStore,
               style: const TextStyle(fontSize: 13, color: Colors.grey),
             ),
             // Íconos
@@ -79,7 +80,7 @@ class DonutTile extends StatelessWidget {
                 children: [
                   const Icon(Icons.favorite_border, color: Colors.pink),
                   GestureDetector(
-                    onTap: onAdd, // Llamar a la función onAdd cuando se presiona el ícono
+                    onTap: onAdd, // Llamar a la función onAdd cuando se presiona el icono
                     child: const Icon(Icons.add, color: Colors.grey),
                   ),
                 ],

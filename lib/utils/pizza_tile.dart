@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class DonutTile extends StatelessWidget {
-  final String donutFlavor;
-  final String donutPrice;
-  final String donutStore;
-  final dynamic donutColor;
+class PizzaTile extends StatelessWidget {
+  final String pizzaFlavor;
+  final String pizzaPrice;
+  final String pizzaStore;
+  final dynamic pizzaColor;
   final String imageName;
-  final VoidCallback onAdd; // Función para agregar al carrito
+  final VoidCallback onAdd;
 
-  const DonutTile({
+  const PizzaTile({
     super.key,
-    required this.donutFlavor,
-    required this.donutPrice,
-    required this.donutStore,
-    required this.donutColor,
+    required this.pizzaFlavor,
+    required this.pizzaPrice,
+    required this.pizzaStore,
+    required this.pizzaColor,
     required this.imageName,
-    required this.onAdd, // Se pasa la función onAdd
+    required this.onAdd, // ✅ ahora sí está bien
   });
 
   @override
@@ -24,17 +24,18 @@ class DonutTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
-          color: donutColor[50],
+          color: pizzaColor[50],
           borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
           children: [
+            // Precio
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: donutColor[100],
+                    color: pizzaColor[100],
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
@@ -42,45 +43,51 @@ class DonutTile extends StatelessWidget {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                   child: Text(
-                    '\$$donutPrice',
+                    '\$$pizzaPrice',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: donutColor[800],
+                      color: pizzaColor[800],
                     ),
                   ),
                 ),
               ],
             ),
-            // Imagen del donut
+
+            // Imagen
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              child: Image.asset(imageName),
+              child: Image.asset(
+                imageName,
+                height: 150,
+              ),
             ),
-            // Nombre del donut
+
+            // Nombre y tienda
             Text(
-              donutFlavor,
+              pizzaFlavor,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: donutColor[800],
+                color: pizzaColor[800],
               ),
             ),
-            // Tienda del donut
             Text(
-              donutStore,
-              style: const TextStyle(fontSize: 13, color: Colors.grey),
+              pizzaStore,
+              style: TextStyle(fontSize: 13, color: Colors.grey[800]),
             ),
-            // Íconos
+
+            // Iconos
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Icon(Icons.favorite_border, color: Colors.pink),
+                  
                   GestureDetector(
-                    onTap: onAdd, // Llamar a la función onAdd cuando se presiona el ícono
-                    child: const Icon(Icons.add, color: Colors.grey),
+                    onTap: onAdd, // ✅ aquí usas el callback
+                    child: Icon(Icons.add, color: Colors.grey[600]),
                   ),
                 ],
               ),

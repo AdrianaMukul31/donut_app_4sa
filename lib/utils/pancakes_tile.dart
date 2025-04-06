@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class DonutTile extends StatelessWidget {
-  final String donutFlavor;
-  final String donutPrice;
-  final String donutStore;
-  final dynamic donutColor;
+class PancakesTile extends StatelessWidget {
+  final String pancakesFlavor;
+  final String pancakesPrice;
+  final String pancakesStore;
+  final dynamic pancakesColor;
   final String imageName;
-  final VoidCallback onAdd; // Función para agregar al carrito
+  final VoidCallback onAdd; // ✅ Nuevo parámetro
 
-  const DonutTile({
+  const PancakesTile({
     super.key,
-    required this.donutFlavor,
-    required this.donutPrice,
-    required this.donutStore,
-    required this.donutColor,
+    required this.pancakesFlavor,
+    required this.pancakesPrice,
+    required this.pancakesStore,
+    required this.pancakesColor,
     required this.imageName,
-    required this.onAdd, // Se pasa la función onAdd
+    required this.onAdd, // ✅ Nuevo parámetro en el constructor
   });
 
   @override
@@ -24,7 +24,7 @@ class DonutTile extends StatelessWidget {
       padding: const EdgeInsets.all(12),
       child: Container(
         decoration: BoxDecoration(
-          color: donutColor[50],
+          color: pancakesColor[50],
           borderRadius: BorderRadius.circular(24),
         ),
         child: Column(
@@ -34,53 +34,55 @@ class DonutTile extends StatelessWidget {
               children: [
                 Container(
                   decoration: BoxDecoration(
-                    color: donutColor[100],
+                    color: pancakesColor[100],
                     borderRadius: const BorderRadius.only(
                       bottomLeft: Radius.circular(24),
                       topRight: Radius.circular(24),
                     ),
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 8, horizontal: 18),
                   child: Text(
-                    '\$$donutPrice',
+                    '\$$pancakesPrice',
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
-                      color: donutColor[800],
+                      color: pancakesColor[800],
                     ),
                   ),
                 ),
               ],
             ),
-            // Imagen del donut
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
-              child: Image.asset(imageName),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+              child: Image.asset(
+                imageName,
+                height: 150,
+              ),
             ),
-            // Nombre del donut
             Text(
-              donutFlavor,
+              pancakesFlavor,
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: donutColor[800],
+                color: pancakesColor[800],
               ),
             ),
-            // Tienda del donut
             Text(
-              donutStore,
-              style: const TextStyle(fontSize: 13, color: Colors.grey),
+              pancakesStore,
+              style: TextStyle(fontSize: 13, color: Colors.grey[800]),
             ),
-            // Íconos
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 4, vertical: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   const Icon(Icons.favorite_border, color: Colors.pink),
                   GestureDetector(
-                    onTap: onAdd, // Llamar a la función onAdd cuando se presiona el ícono
-                    child: const Icon(Icons.add, color: Colors.grey),
+                    onTap: onAdd, // ✅ Aquí ejecuta la función al tocar el "+"
+                    child: Icon(Icons.add, color: Colors.grey[600]),
                   ),
                 ],
               ),

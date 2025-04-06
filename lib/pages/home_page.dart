@@ -15,14 +15,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  List<Widget> myTabs=[
-    MyTab(iconPath: 'lib/icons/donut.png',),
-    MyTab(iconPath: 'lib/icons/burger.png',),
-    MyTab(iconPath: 'lib/icons/smoothie.png',),
-    MyTab(iconPath: 'lib/icons/pancakes.png',),
-    MyTab(iconPath: 'lib/icons/pizza.png',)
-
+  List<Widget> myTabs = [
+    const MyTab(
+      iconPath: 'lib/icons/donut.png',
+      label: "Donut",
+    ),
+    const MyTab(iconPath: 'lib/icons/burger.png', label: "Burguer"),
+    const MyTab(
+      iconPath: 'lib/icons/smoothie.png',
+      label: "Smoothie",
+    ),
+    const MyTab(
+      iconPath: 'lib/icons/pancakes.png',
+      label: "Pancakes",
+    ),
+    const MyTab(
+      iconPath: 'lib/icons/pizza.png',
+      label: "Pizza",
+    ),
   ];
+
+  // Variables para el carrito
+  int totalItems = 0;
+  int totalPrice = 0;
+
+  // Función que se llama al presionar "+"
+  void addToCart(String flavor, int price) {
+    setState(() {
+      totalItems += 1;
+      totalPrice += price;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,57 +54,67 @@ class _HomePageState extends State<HomePage> {
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.transparent,
-          //icono de la izquierda
+          // Icono de la izquierda
           leading: Icon(
             Icons.menu,
             color: Colors.grey[800],
-            ),
-            actions: [
-              Padding(
-                padding: const EdgeInsets.only(right: 24.0),
-                child: Icon(Icons.person),
-              )
-              ],
+          ),
+          actions: const [
+            Padding(
+              padding: EdgeInsets.only(right: 24.0),
+              child: Icon(Icons.person),
+            )
+          ],
         ),
         body: Column(
-          children:[
-        //1.texto principal(Text)
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 24),
-          child: Row(
-            children: [
-              Text("I want to ",style: TextStyle(fontSize: 32),),
-              Text("Eat",style: TextStyle(
-                //tamano de letras
-                fontSize: 32,
-                //negritas
-                fontWeight: FontWeight.bold,
-                //subrayado
-                decoration: TextDecoration.underline,
-              )),
-            ],
-          ),
-        ),
-        //2.pestanas(TabBar)
-        TabBar(tabs: myTabs),
-      
-        //3.contenido de pestanas(TabBarView)
-        Expanded(
-          child: TabBarView(children: [
-            DonutTab(),
-            BurgerTab(),
-            SmoothieTab(),
-            PancakesTab(),
-            PizzaTab()
-          ]),
-        ),
-        //4.carrito(cart)
-          ShoppingCart()
+          children: [
+            // 1. Texto principal (Text)
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 24.0),
+              child: Row(
+                children: [
+                  Text(
+                    "I want to ",
+                    style: TextStyle(fontSize: 32),
+                  ),
+                  Text(
+                    "Eat",
+                    style: TextStyle(
+                      // Tamaño de letra
+                      fontSize: 32,
+                      // Negritas
+                      fontWeight: FontWeight.bold,
+                      // Subrayado
+                      decoration: TextDecoration.underline,
+                    ),
+                  ),
+                ],
+              ),
+            ),
 
-        ],
+            // 2. Pestañas (TabBar)
+            TabBar(
+              tabs: myTabs,
+            ),
+
+            // 3. Contenido de pestañas (TabBarView)
+            Expanded(
+              child: TabBarView(children: [
+                DonutTab(onDonutAdded: addToCart),
+                BurgerTab(onBurgerAdded: addToCart),
+                SmoothieTab(onSmoothieAdded: addToCart),
+                PancakesTab(onPancakeAdded: addToCart),
+                PizzaTab(onPizzaAdded: addToCart)
+              ]),
+            ),
+            // 4. Carrito (Cart) con datos dinámicos
+            ShoppingCart(
+              totalItems: totalItems,
+              totalPrice: totalPrice,
+            ),
+          ],
         ),
       ),
     );
   }
 }
-

@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
 
 class ShoppingCart extends StatelessWidget {
+  final int totalItems;
+  final int totalPrice;
+
   const ShoppingCart({
     super.key,
+    required this.totalItems,
+    required this.totalPrice,
   });
 
   @override
@@ -11,25 +16,34 @@ class ShoppingCart extends StatelessWidget {
       color: Colors.white,
       padding: const EdgeInsets.all(16),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween, //separar a los extremos
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Padding(padding: EdgeInsets.only(left: 28),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('2 Items | \$45', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),),
-              Text('Delivery Charges Included')
-            ],
+          Padding(
+            padding: const EdgeInsets.only(left: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  '$totalItems Items | \$$totalPrice',
+                  style: const TextStyle(
+                      fontWeight: FontWeight.bold, fontSize: 28),
+                ),
+                const Text('Delivery Charges Included')
+              ],
+            ),
           ),
-          ),
-          ElevatedButton(onPressed: (){},
-          style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.pink,
-            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12)
-          ),
-          child: const Text('View Cart', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),))
+          ElevatedButton(
+              onPressed: () {},
+              style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.pink,
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 12)),
+              child: const Text(
+                'View Cart',
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+              ))
         ],
-    
       ),
     );
   }
